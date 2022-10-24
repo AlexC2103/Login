@@ -1,8 +1,5 @@
 <?php
-    require("Login.php");
-    
-    $login = new Login();
-    $login->processEnv();
+    require("src/Login.php");
 
     //https://blog.doppler.com/configuring-php-applications-using-environment-variables
 ?>

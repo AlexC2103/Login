@@ -19,4 +19,25 @@
 
             fclose($env);
         }
+
+        public function checkLogin() {
+
+            $userInput = $_POST['user'];
+            $passwordInput = $_POST['parola'];
+
+            $user = $this->array["USER"];
+            $parola = $this->array["PAROLA"];
+
+            if (trim($user) == $userInput && $parola == $passwordInput) {
+                session_destroy();
+
+                session_start();
+                echo "Login successful";
+                $_SESSION['username'] = 'alex';
+                header("Location: http://localhost/login_form/home.php", true, 301);
+
+            } else {
+                echo "Incorrect username or password!";
+            }
+        }
     }
