@@ -6,7 +6,8 @@
 
     $routes = [
         '/login_form/login' => ['Login', 'checkLogin'],
-        '/login_form/home' => ['Home', 'welcome']
+        '/login_form/home' => ['Home', 'welcome'],
+        '/login_form/logout' => ['Home', 'logout']
     ];
 
     $path = $_SERVER['REQUEST_URI'];
