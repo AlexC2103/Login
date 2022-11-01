@@ -15,8 +15,14 @@
         if ($key == $path) {
 
             require("src/Controllers/{$value[0]}.php");
-            echo "src/Controllers/{$value[0]}.php";
-            $obj = new $value[0]();
+            echo "src/Controllers/$value[0].php";
+
+            $obj2 = new LoginController();
+            $reflectionMethod = new ReflectionMethod($value[0], $value[1]);
+            echo $reflectionMethod->invoke(new $value[0]());
+
+            $class = $value[0];
+            $obj = new $class();
 
             $method = $value[1];
             $view = $obj->$method();
