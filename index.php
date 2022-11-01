@@ -1,11 +1,10 @@
 <?php
 
-    session_start();
-
+    use Controllers\LoginController;
     processEnv();
 
     $routes = [
-        '/login_form/login' => ['Login', 'checkLogin'],
+        '/login_form/login' => ['LoginController', 'checkLogin'],
         '/login_form/home' => ['Home', 'welcome'],
         '/login_form/logout' => ['Home', 'logout']
     ];
@@ -15,17 +14,14 @@
     foreach ($routes as $key => $value) {
         if ($key == $path) {
 
-            $dir = strtolower($value[0]);
-            require("src/{$dir}/{$value[0]}.php");
-
+            require("src/Controllers/{$value[0]}.php");
+            echo "src/Controllers/{$value[0]}.php";
             $obj = new $value[0]();
-            //$login->processEnv();
 
             $method = $value[1];
-            $obj->$method();
+            $view = $obj->$method();
 
-
-            include("src/{$dir}/{$value[0]}.html");
+            include("src/View/$view");
         }
     }
 

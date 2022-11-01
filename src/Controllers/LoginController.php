@@ -1,14 +1,11 @@
 <?php
-    class Login {
+    namespace Controllers;
 
-        public $array = [];
+    use Services\Login;
 
-        function __construct() {
-
-        }
+    class LoginController {
 
         public function checkLogin() {
-
             if(!isset($_POST['user'])) {
                 return;
             }
@@ -16,13 +13,10 @@
             $userInput = $_POST['user'];
             $passwordInput = $_POST['parola'];
 
-            $user = $_ENV["USER"];
-            $parola = $_ENV["PAROLA"];
+            $service = new Login();
+            $ret = $service->checkLogin($userInput, $passwordInput);
 
-            if (trim($user) == $userInput && $parola == $passwordInput) {
-                session_destroy();
-
-                session_start();
+            if ($ret) {
                 echo "Login successful";
                 $_SESSION['username'] = 'alex';
                 header("Location: http://localhost/login_form/home", true, 301);
@@ -30,5 +24,7 @@
             } else {
                 echo "Incorrect username or password!";
             }
+
+            return "login.html";
         }
     }

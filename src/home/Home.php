@@ -1,7 +1,7 @@
 <?php
     class Home {
         public function welcome() {
-            echo 'welcome';
+            echo 'Welcome to home page!';
         }
 
         public function logout() {
