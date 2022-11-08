@@ -1,30 +1,37 @@
 <?php
-    //namespace Controllers;
 
-    use Services\Login;
+namespace Controllers;
+require ("AbstractController.php");
+require ("src/Services/Login.php");
 
-    class LoginController {
+use Services\Login;
 
-        public function checkLogin() {
-            if(!isset($_POST['user'])) {
-                return;
-            }
-
-            $userInput = $_POST['user'];
-            $passwordInput = $_POST['parola'];
-
-            $service = new Login();
-            $ret = $service->checkLogin($userInput, $passwordInput);
-
-            if ($ret) {
-                echo "Login successful";
-                $_SESSION['username'] = 'alex';
-                header("Location: http://localhost/login_form/home", true, 301);
-
-            } else {
-                echo "Incorrect username or password!";
-            }
-
-            return "login.html";
+class LoginController extends AbstractController
+{
+    public function checkLogin()
+    {
+        if (!isset($_POST['user'])) {
+            $this->view = "error.html";
+            return;
         }
+
+        $userInput = $_POST['user'];
+        $passwordInput = $_POST['parola'];
+
+        $service = new Login();
+        $ret = $service->checkLogin($userInput, $passwordInput);
+
+        if ($ret) {
+            echo "Login successful";
+            $_SESSION['username'] = 'alex';
+            header("Location: http://localhost/login_form/home", true, 301);
+
+        } else {
+            echo "Incorrect username or password!";
+        }
+
+        $this->view = "login.html";
     }
+
+}
+
