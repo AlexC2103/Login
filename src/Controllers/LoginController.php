@@ -11,7 +11,7 @@ class LoginController extends AbstractController
     public function checkLogin()
     {
         if (!isset($_POST['user'])) {
-            $this->view = "error.html";
+            $this->view = "login.html";
             return;
         }
 
